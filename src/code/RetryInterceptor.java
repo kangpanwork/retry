@@ -28,7 +28,7 @@ public class RetryInterceptor extends TimeAspect implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object result = null;
         if (before(target, method, args)) {
-            if (condition != null && condition.test(target)) {
+            if (condition == null || condition.test(target)) {
                 try {
                     result = method.invoke(target, args);
                 } catch (Throwable runtimeException) {
